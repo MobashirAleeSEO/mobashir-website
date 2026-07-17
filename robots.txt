@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# AI / GEO crawlers — explicitly allowed since this site is optimized to be cited by AI answer engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://mobashiraleekhan.com/sitemap.xml
