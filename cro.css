@@ -1,0 +1,155 @@
+/* ==========================================================================
+   CRO.CSS — Conversion layer. Load AFTER styles.css/pages.css/blog.css/animations.css.
+   Covers: announcement bar, floating actions, WhatsApp, modals (booking + exit
+   intent), lead forms, trust badges, star ratings, awards, social proof.
+   ========================================================================== */
+
+/* ---------- ANNOUNCEMENT / URGENCY BAR ---------- */
+.announcement-bar {
+  position: relative; background: var(--color-accent); color: var(--color-accent-ink);
+  text-align: center; font-size: var(--fs-xs); font-weight: 600; padding: var(--space-2) var(--space-8);
+  z-index: 101;
+}
+.announcement-bar a { text-decoration: underline; text-underline-offset: 2px; }
+.announcement-bar-close {
+  position: absolute; right: var(--space-3); top: 50%; transform: translateY(-50%);
+  width: 24px; height: 24px; display: grid; place-items: center; font-size: var(--fs-sm);
+  border-radius: 50%; transition: background var(--dur-fast) var(--ease-out);
+}
+.announcement-bar-close:hover { background: rgba(0,0,0,0.08); }
+.announcement-bar.hidden { display: none; }
+
+/* ---------- STICKY MOBILE CTA BAR ---------- */
+.sticky-mobile-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  background: var(--color-surface); border-top: 1px solid var(--color-border); box-shadow: var(--shadow-lg);
+  padding: var(--space-3) var(--space-4); display: flex; align-items: center; gap: var(--space-3);
+  transform: translateY(120%); transition: transform var(--dur-slow) var(--ease-out);
+}
+.sticky-mobile-cta.visible { transform: translateY(0); }
+@media (min-width: 1024px) { .sticky-mobile-cta { display: none; } }
+.sticky-mobile-cta p { font-size: var(--fs-xs); color: var(--color-ink-muted); flex: 1; margin: 0; }
+.sticky-mobile-cta .btn { flex-shrink: 0; height: 44px; padding-inline: var(--space-4); font-size: var(--fs-xs); }
+.sticky-mobile-cta-close {
+  width: 28px; height: 28px; display: grid; place-items: center; color: var(--color-ink-subtle); flex-shrink: 0;
+}
+
+/* ---------- FLOATING ACTION CLUSTER ---------- */
+.floating-actions {
+  position: fixed; right: var(--space-5); bottom: var(--space-6); z-index: 95;
+  display: flex; flex-direction: column-reverse; align-items: flex-end; gap: var(--space-3);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility var(--dur-base);
+}
+.floating-actions.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .floating-actions { transition: opacity 150ms linear; transform: none; } }
+@media (max-width: 1023px) { .floating-actions { bottom: calc(var(--space-6) + 64px); } }
+.fab {
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  box-shadow: var(--shadow-lg); font-size: var(--fs-lg); transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-out);
+}
+.fab:hover { transform: scale(1.08); }
+.fab-main { background: var(--gradient-accent); color: var(--color-accent-ink); }
+.fab-whatsapp { background: #25D366; color: #fff; width: 52px; height: 52px; }
+.fab-secondary {
+  background: var(--color-surface); color: var(--color-primary); width: 48px; height: 48px;
+  border: 1px solid var(--color-border); opacity: 0; visibility: hidden; transform: translateY(8px) scale(0.9);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), visibility var(--dur-fast);
+}
+.floating-actions.open .fab-secondary { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.fab-secondary.fab-whatsapp { background: #25D366; color: #fff; border-color: #25D366; width: 52px; height: 52px; }
+.fab-main[aria-expanded="true"] { transform: rotate(45deg); }
+.fab-label {
+  position: absolute; right: 68px; white-space: nowrap; background: var(--color-primary); color: var(--color-bg, #fff);
+  font-size: var(--fs-xs); font-weight: 600; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill);
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease-out);
+}
+.fab:hover .fab-label { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .fab, .fab-secondary { transition: opacity 150ms linear; } }
+
+/* ---------- MODALS (Booking + Exit Intent) shared base ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(10, 31, 22, 0.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  z-index: 200; opacity: 0; visibility: hidden; transition: opacity var(--dur-base) var(--ease-out), visibility var(--dur-base);
+  display: flex; align-items: center; justify-content: center; padding: var(--space-4);
+}
+.modal-backdrop.open { opacity: 1; visibility: visible; }
+.modal-box {
+  background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: var(--space-7) var(--space-6);
+  position: relative; transform: translateY(16px) scale(0.98); transition: transform var(--dur-base) var(--ease-spring);
+}
+.modal-backdrop.open .modal-box { transform: translateY(0) scale(1); }
+.modal-close {
+  position: absolute; top: var(--space-4); right: var(--space-4); width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; color: var(--color-ink-subtle); transition: background var(--dur-fast) var(--ease-out);
+}
+.modal-close:hover { background: var(--color-surface-raised); }
+.modal-eyebrow { margin-bottom: var(--space-2); }
+.modal-box h2 { font-size: var(--fs-2xl); margin-bottom: var(--space-3); }
+.modal-box p.modal-sub { font-size: var(--fs-sm); color: var(--color-ink-muted); margin-bottom: var(--space-6); }
+@media (prefers-reduced-motion: reduce) {
+  .modal-backdrop, .modal-box { transition: opacity 150ms linear, visibility 150ms; transform: none; }
+}
+
+/* Calendly placeholder embed */
+.calendly-placeholder {
+  border: 1.5px dashed var(--color-border-strong); border-radius: var(--radius-md); background: var(--color-surface-raised);
+  padding: var(--space-7) var(--space-5); text-align: center; margin-bottom: var(--space-6);
+}
+.calendly-placeholder p { font-size: var(--fs-sm); margin-bottom: var(--space-3); }
+.calendly-placeholder code {
+  display: inline-block; font-family: var(--font-mono); font-size: var(--fs-xs); background: var(--color-surface);
+  border: 1px solid var(--color-border); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm);
+}
+.modal-divider { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); }
+.modal-divider::before, .modal-divider::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
+.modal-divider span { font-size: var(--fs-xs); color: var(--color-ink-subtle); text-transform: uppercase; letter-spacing: var(--ls-wide); }
+
+/* Exit intent specific */
+.exit-modal .modal-box { max-width: 460px; text-align: center; }
+.exit-modal-icon {
+  width: 56px; height: 56px; border-radius: 50%; background: rgba(46,158,255,0.14); color: var(--color-accent-hover);
+  display: grid; place-items: center; margin-inline: auto; margin-bottom: var(--space-5); font-size: var(--fs-xl);
+}
+
+/* ---------- LEAD FORM (shared: modal + inline) ---------- */
+.lead-form { display: flex; flex-direction: column; gap: var(--space-4); text-align: left; }
+.lead-form-success { display: none; text-align: center; padding: var(--space-4) 0; }
+.lead-form-success.show { display: block; }
+.lead-form-success .form-success-icon { margin-bottom: var(--space-4); }
+.lead-form.submitted .lead-form-fields { display: none; }
+
+/* ---------- TRUST BADGES ---------- */
+.trust-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-7); padding-block: var(--space-6); }
+.trust-badge { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-sm); color: var(--color-ink-muted); font-weight: 500; }
+.trust-badge-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(34,184,196,0.14); color: var(--color-data); display: grid; place-items: center; font-size: var(--fs-sm); flex-shrink: 0; }
+.section-dark .trust-badge { color: var(--color-ink-muted); }
+
+/* ---------- SOCIAL PROOF STRIP ---------- */
+.social-proof-line { text-align: center; font-size: var(--fs-sm); color: var(--color-ink-subtle); margin-bottom: var(--space-6); }
+.social-proof-line strong { color: var(--color-ink); font-weight: 700; }
+.avatar-stack { display: inline-flex; margin-right: var(--space-2); vertical-align: middle; }
+.avatar-stack span {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--gradient-primary); color: var(--color-accent);
+  font-size: 10px; font-weight: 700; display: grid; place-items: center; border: 2px solid var(--color-bg);
+  margin-left: -8px;
+}
+.avatar-stack span:first-child { margin-left: 0; }
+
+/* ---------- STAR RATING ---------- */
+.star-rating { color: var(--color-accent); font-size: var(--fs-sm); letter-spacing: 2px; margin-bottom: var(--space-3); }
+.star-rating .visually-hidden-rating { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ---------- AWARDS / RECOGNITION ---------- */
+.awards-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-6); }
+.award-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-3);
+  padding: var(--space-5); width: 200px;
+}
+.award-icon {
+  width: 56px; height: 56px; border-radius: 50%; background: rgba(46,158,255,0.14); color: var(--color-accent-hover);
+  display: grid; place-items: center; font-size: var(--fs-xl);
+}
+.award-card h3 { font-size: var(--fs-sm); font-weight: 600; }
+.award-card p { font-size: var(--fs-xs); color: var(--color-ink-subtle); }
