@@ -304,8 +304,14 @@
   <section class="about section-light" id="about" aria-labelledby="about-heading">
     <div class="container about-grid">
       <div class="about-visual reveal-left">
-        <div class="about-photo-frame">
-          <div class="about-photo-placeholder" role="img" aria-label="Portrait of Mobashir Alee Khan">MAK</div>
+        <div class="about-photo-frame" data-tilt data-tilt-strength="4">
+          <img
+            class="about-photo-placeholder"
+            src="assets/photos/mobashir-photo.jpg"
+            width="380" height="380"
+            alt="Portrait of Mobashir Alee Khan, SEO, GEO and AEO consultant"
+            loading="lazy"
+            decoding="async">
           <span class="badge badge-float badge-float-1">Google SEO Fundamentals</span>
           <span class="badge badge-float badge-float-2">HubSpot SEO Certified</span>
         </div>
@@ -469,32 +475,36 @@
   <!-- ============ STATISTICS ============ -->
   <section class="section-light" aria-labelledby="recognition-heading">
     <div class="container">
-      <div class="section-header reveal" style="text-align:center; margin-inline:auto;">
-        <p class="eyebrow">Recognition</p>
-        <h2 id="recognition-heading">Certifications &amp; Standing</h2>
-        <p class="section-sub">Placeholder recognition tiles &mdash; swap in real awards, platform badges, or press mentions as they're earned.</p>
-      </div>
-      <div class="awards-strip reveal">
-        <div class="award-card">
-          <span class="award-icon" aria-hidden="true">&#127942;</span>
-          <h3>Top Rated Freelancer</h3>
-          <p>Upwork / Fiverr &mdash; placeholder</p>
+      <div class="recognition-card reveal-scale">
+        <p class="eyebrow" style="text-align:center;">Recognition</p>
+        <h2 id="recognition-heading" style="text-align:center;">Certified &amp; Verified</h2>
+        <div class="awards-strip">
+          <div class="award-card">
+            <span class="award-badge-shape" aria-hidden="true">&#9878;</span>
+            <h3>Google Certified</h3>
+            <div class="award-verified" aria-hidden="true"><div class="award-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>#10003; Verified</div>
+            <p>SEO Fundamentals &amp; Ads Search</p>
+          </div>
+          <div class="award-card">
+            <span class="award-badge-shape" aria-hidden="true">&#128274;</span>
+            <h3>HubSpot Certified</h3>
+            <div class="award-verified" aria-hidden="true"><div class="award-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>#10003; Verified</div>
+            <p>SEO Certification</p>
+          </div>
+          <div class="award-card">
+            <span class="award-badge-shape" aria-hidden="true">&#128200;</span>
+            <h3>SEMrush Academy</h3>
+            <div class="award-verified" aria-hidden="true"><div class="award-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>#10003; Verified</div>
+            <p>Digital Marketing Certification</p>
+          </div>
+          <div class="award-card">
+            <span class="award-badge-shape" aria-hidden="true">&#127942;</span>
+            <h3>7 Certifications</h3>
+            <div class="award-verified" aria-hidden="true"><div class="award-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>#10003; Verified</div>
+            <p>Google, HubSpot, SEMrush &amp; Coursera</p>
+          </div>
         </div>
-        <div class="award-card">
-          <span class="award-icon" aria-hidden="true">&#9733;</span>
-          <h3>5.0 Average Client Rating</h3>
-          <p>Across platform reviews &mdash; placeholder</p>
-        </div>
-        <div class="award-card">
-          <span class="award-icon" aria-hidden="true">&#9878;</span>
-          <h3>Google Certified Partner</h3>
-          <p>SEO Fundamentals &amp; Ads Search</p>
-        </div>
-        <div class="award-card">
-          <span class="award-icon" aria-hidden="true">&#128274;</span>
-          <h3>HubSpot Certified</h3>
-          <p>SEO Certification</p>
-        </div>
+        <p class="recognition-tagline">Every credential above is real and verifiable &mdash; see the full set on the <a href="about.html">About page</a>.</p>
       </div>
     </div>
   </section>
