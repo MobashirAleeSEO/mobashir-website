@@ -171,31 +171,70 @@
       <div class="section-header reveal">
         <p class="eyebrow">Certifications</p>
         <h2>Credentials behind the work</h2>
+        <p class="section-sub">Real, verifiable certificates — tap any to view full size.</p>
       </div>
       <div class="card-grid card-grid-3">
-        <article class="portfolio-card reveal" data-tilt data-tilt-strength="6">
-          <div class="portfolio-thumb" aria-hidden="true">GD</div>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/google-digital-marketing-ecommerce.jpg" data-cert-title="Google Digital Marketing &amp; E-commerce" aria-label="View full certificate: Google Digital Marketing & E-commerce">
+            <img src="assets/certificates/google-digital-marketing-ecommerce.jpg" alt="Google Digital Marketing & E-commerce certificate for Mobashir Alee Khan" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
           <h3>Google Digital Marketing &amp; E-commerce</h3>
-          <p>Foundational certification covering the full digital marketing and e-commerce funnel.</p>
+          <p>7-course professional certificate covering the full digital marketing and e-commerce funnel. Issued via Coursera, 2023.</p>
         </article>
-        <article class="portfolio-card reveal" data-tilt data-tilt-strength="6">
-          <div class="portfolio-thumb" aria-hidden="true">GS</div>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/google-seo-fundamentals.jpg" data-cert-title="Google SEO Fundamentals" aria-label="View full certificate: Google SEO Fundamentals">
+            <img src="assets/certificates/google-seo-fundamentals.jpg" alt="Google SEO Fundamentals certificate for Mobashir Alee Khan, UC Davis via Coursera" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
           <h3>Google SEO Fundamentals</h3>
-          <p>Core technical and on-page SEO principles, direct from Google's own curriculum.</p>
+          <p>Core technical and on-page SEO principles, UC Davis via Coursera, 2021.</p>
         </article>
-        <article class="portfolio-card reveal" data-tilt data-tilt-strength="6">
-          <div class="portfolio-thumb" aria-hidden="true">GA</div>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/google-ads-search.jpg" data-cert-title="Google Ads Search Certification" aria-label="View full certificate: Google Ads Search Certification">
+            <img src="assets/certificates/google-ads-search.jpg" alt="Google Ads Search Certification for Mobashir Alee Khan" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
           <h3>Google Ads Search Certification</h3>
           <p>Search intent and auction mechanics — knowledge that sharpens organic keyword strategy too.</p>
         </article>
-        <article class="portfolio-card reveal" data-tilt data-tilt-strength="6">
-          <div class="portfolio-thumb" aria-hidden="true">HS</div>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/hubspot-seo-certified.jpg" data-cert-title="HubSpot SEO Certification" aria-label="View full certificate: HubSpot SEO Certification">
+            <img src="assets/certificates/hubspot-seo-certified.jpg" alt="HubSpot Academy SEO Certified badge for Mobashir Alee Khan" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
           <h3>HubSpot SEO Certification</h3>
-          <p>Content-driven SEO strategy aligned to the full buyer journey.</p>
+          <p>Content-driven SEO strategy aligned to the full buyer journey. Valid through Nov 2025.</p>
+        </article>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/semrush-seo-fundamentals.jpg" data-cert-title="SEMrush Academy — SEO Fundamentals Exam" aria-label="View full certificate: SEMrush Academy SEO Fundamentals Exam">
+            <img src="assets/certificates/semrush-seo-fundamentals.jpg" alt="SEMrush Academy SEO Fundamentals Exam certificate for Mobashir Alee Khan" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
+          <h3>SEMrush Academy — SEO Fundamentals</h3>
+          <p>Digital Marketing Certification covering keyword research, on-page and technical SEO.</p>
+        </article>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/coursera-brand-marketing-seo-wix.jpg" data-cert-title="Brand Marketing and SEO Tools using Wix" aria-label="View full certificate: Brand Marketing and SEO Tools using Wix">
+            <img src="assets/certificates/coursera-brand-marketing-seo-wix.jpg" alt="Coursera Project Network certificate: Brand Marketing and SEO Tools using Wix" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
+          <h3>Brand Marketing &amp; SEO Tools (Wix)</h3>
+          <p>Coursera Project Network — applied brand marketing and on-platform SEO tooling.</p>
+        </article>
+        <article class="portfolio-card cert-card reveal" data-tilt data-tilt-strength="6">
+          <button class="cert-thumb-btn" data-cert-modal data-cert-img="assets/certificates/hp-life-social-media-marketing.jpg" data-cert-title="HP LIFE — Social Media Marketing" aria-label="View full certificate: HP LIFE Social Media Marketing">
+            <img src="assets/certificates/hp-life-social-media-marketing.jpg" alt="HP LIFE Social Media Marketing course certificate for Mobashir Alee Khan" loading="lazy" decoding="async" class="cert-thumb-img">
+          </button>
+          <h3>HP LIFE — Social Media Marketing</h3>
+          <p>Social advertising, campaign creation, audience targeting and content strategy.</p>
         </article>
       </div>
     </div>
   </section>
+
+  <!-- Certificate lightbox -->
+  <div class="modal-backdrop cert-modal" id="cert-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+    <div class="modal-box cert-modal-box">
+      <button class="modal-close" data-modal-close aria-label="Close">&times;</button>
+      <h2 id="cert-modal-title" class="cert-modal-title"></h2>
+      <img src="" alt="" id="cert-modal-img" class="cert-modal-img">
+    </div>
+  </div>
 
   <section class="section-light">
     <div class="container">
