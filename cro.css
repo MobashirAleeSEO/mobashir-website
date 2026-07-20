@@ -143,6 +143,27 @@
 
 /* ---------- AWARDS / RECOGNITION ---------- */
 .awards-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-6); }
+.recognition-card {
+  background: var(--gradient-primary); border-radius: var(--radius-xl); padding: var(--space-8) var(--space-6);
+  position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
+}
+.recognition-card::before { content: ''; position: absolute; inset: 0; background: var(--gradient-mesh); }
+.recognition-card > * { position: relative; z-index: 1; }
+.recognition-card .eyebrow { color: var(--color-accent); }
+.recognition-card h2 { color: var(--color-on-dark); margin-bottom: var(--space-7); }
+.recognition-tagline { text-align: center; font-size: var(--fs-sm); color: rgba(245,248,252,0.7); margin-top: var(--space-7); padding-top: var(--space-6); border-top: 1px solid rgba(245,248,252,0.15); }
+.recognition-tagline a { color: var(--color-accent); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.award-badge-shape {
+  width: 64px; height: 64px; display: grid; place-items: center; margin-inline: auto;
+  background: rgba(255,255,255,0.08); border: 1.5px solid rgba(46,158,255,0.4);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  font-size: var(--fs-xl); color: var(--color-accent);
+}
+.recognition-card .award-card h3 { color: var(--color-on-dark); }
+.award-verified {
+  font-size: var(--fs-xs); font-weight: 700; color: #33D69F; letter-spacing: var(--ls-wide); text-transform: uppercase;
+}
+.recognition-card .award-card p { color: rgba(245,248,252,0.6); }
 .award-card {
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-3);
   padding: var(--space-5); width: 200px;

@@ -155,7 +155,7 @@
 
     <ul class="nav-links" id="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="https://mobashiraleeseo.github.io/mobashir-portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
       <li><a href="#case-studies">Case Studies</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="about.html">About</a></li>
@@ -171,7 +171,7 @@
   <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
     <ul>
       <li><a href="#services">Services</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="https://mobashiraleeseo.github.io/mobashir-portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
       <li><a href="#case-studies">Case Studies</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="about.html">About</a></li>
@@ -377,6 +377,44 @@
   </section>
 
   <!-- ============ WHY CHOOSE US ============ -->
+  <!-- ============ VIDEO SHOWCASE ============ -->
+  <section class="section-light video-showcase" aria-labelledby="video-showcase-heading">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">In Motion</p>
+        <h2 id="video-showcase-heading">See the work, not just the results</h2>
+      </div>
+      <div class="video-grid">
+        <div class="video-card reveal-left">
+          <video class="video-card-el" poster="assets/videos/rank-you-up-poster.jpg" muted loop playsinline preload="metadata">
+            <source src="assets/videos/rank-you-up.mp4" type="video/mp4">
+          </video>
+          <button class="video-sound-toggle" aria-label="Unmute video" aria-pressed="false">
+            <span class="icon-muted" aria-hidden="true">&#128263;</span>
+            <span class="icon-unmuted" aria-hidden="true">&#128266;</span>
+          </button>
+          <div class="video-card-caption">
+            <h3>Rank You Up</h3>
+            <p>A quick look at the services and brand behind the work.</p>
+          </div>
+        </div>
+        <div class="video-card reveal-right">
+          <video class="video-card-el" poster="assets/videos/behind-the-work-poster.jpg" muted loop playsinline preload="metadata">
+            <source src="assets/videos/behind-the-work.mp4" type="video/mp4">
+          </video>
+          <button class="video-sound-toggle" aria-label="Unmute video" aria-pressed="false">
+            <span class="icon-muted" aria-hidden="true">&#128263;</span>
+            <span class="icon-unmuted" aria-hidden="true">&#128266;</span>
+          </button>
+          <div class="video-card-caption">
+            <h3>Behind the Work</h3>
+            <p>A closer look at how projects come together.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="why-us section-tint" aria-labelledby="why-heading">
     <div class="container why-grid">
       <div class="reveal-left">
@@ -557,6 +595,9 @@
           <p>Digital PR and outreach campaign that tripled referring domains in one quarter.</p>
         </article>
       </div>
+      <div class="portfolio-cta reveal">
+        <a href="https://mobashiraleeseo.github.io/mobashir-portfolio/" target="_blank" rel="noopener" class="btn btn-primary btn-magnetic" data-magnetic>View Full Portfolio <span aria-hidden="true">&rarr;</span></a>
+      </div>
     </div>
   </section>
 
@@ -569,31 +610,81 @@
       </div>
       <div class="card-grid card-grid-3">
         <article class="case-card reveal" data-tilt data-tilt-strength="6">
-          <p class="case-industry">SaaS</p>
-          <h3>From page 3 to the top 3 pack in five months</h3>
+          <div class="case-compare">
+            <button class="case-compare-img" data-cert-modal data-cert-img="assets/case-studies/cs1-before.jpg" data-cert-title="Before — Google Search Console, 58 clicks/3mo" aria-label="View before screenshot, full size">
+              <img src="assets/case-studies/cs1-before.jpg" alt="Google Search Console before: 58 clicks over 3 months" loading="lazy" decoding="async">
+              <span class="case-compare-tag">Before</span>
+            </button>
+            <button class="case-compare-img" data-cert-modal data-cert-img="assets/case-studies/cs1-after.jpg" data-cert-title="After — Google Search Console, 47.6K clicks/3mo" aria-label="View after screenshot, full size">
+              <img src="assets/case-studies/cs1-after.jpg" alt="Google Search Console after: 47.6K clicks over 3 months" loading="lazy" decoding="async">
+              <span class="case-compare-tag case-compare-tag-after">After</span>
+            </button>
+          </div>
+          <p class="case-industry">Technical &amp; Content SEO</p>
+          <h3>From 58 clicks to 47.6K clicks in six months</h3>
+          <p class="case-desc">Fixed the technical foundation and rebuilt content around what users were actually searching for — moved the site from invisible to dominating its search results.</p>
           <div class="case-pills">
             <span class="pill">820x clicks</span>
-            <span class="pill">+46.1% traffic</span>
+            <span class="pill">5.7 avg. position</span>
           </div>
-          <a href="contact.html" class="card-link">Read the strategy <span aria-hidden="true">&rarr;</span></a>
         </article>
+
         <article class="case-card reveal" data-tilt data-tilt-strength="6">
-          <p class="case-industry">Local Service</p>
-          <h3>96x call volume through local + AEO signals</h3>
+          <div class="case-compare">
+            <button class="case-compare-img" data-cert-modal data-cert-img="assets/case-studies/cs2-before.jpg" data-cert-title="Before — Google Business Profile, 3 calls/mo" aria-label="View before screenshot, full size">
+              <img src="assets/case-studies/cs2-before.jpg" alt="Google Business Profile before: 3 calls per month" loading="lazy" decoding="async">
+              <span class="case-compare-tag">Before</span>
+            </button>
+            <button class="case-compare-img" data-cert-modal data-cert-img="assets/case-studies/cs2-after.jpg" data-cert-title="After — Google Business Profile, 289 calls/mo" aria-label="View after screenshot, full size">
+              <img src="assets/case-studies/cs2-after.jpg" alt="Google Business Profile after: 289 calls per month" loading="lazy" decoding="async">
+              <span class="case-compare-tag case-compare-tag-after">After</span>
+            </button>
+          </div>
+          <p class="case-industry">Local SEO — UK Clinic</p>
+          <h3>96x call volume through local search optimization</h3>
+          <p class="case-desc">Optimized the clinic's local search presence around what patients were actually searching for, making them the first choice in their area.</p>
           <div class="case-pills">
             <span class="pill">96x calls</span>
-            <span class="pill">Featured snippet wins</span>
+            <span class="pill">3 &rarr; 289 / month</span>
           </div>
-          <a href="contact.html" class="card-link">Read the strategy <span aria-hidden="true">&rarr;</span></a>
         </article>
+
         <article class="case-card reveal" data-tilt data-tilt-strength="6">
-          <p class="case-industry">B2B Content</p>
-          <h3>10,500+ AI citations from a GEO-first content rebuild</h3>
+          <button class="case-single-img" data-cert-modal data-cert-img="assets/case-studies/cs3-ai-citations.jpg" data-cert-title="AI Performance — 10.5K citations via Microsoft Copilot" aria-label="View full dashboard screenshot">
+            <img src="assets/case-studies/cs3-ai-citations.jpg" alt="AI Performance dashboard showing 10.5K total citations and 18 average cited pages via Microsoft Copilot" loading="lazy" decoding="async">
+          </button>
+          <p class="case-industry">GEO — AI Citations</p>
+          <h3>10,500+ AI citations via Microsoft Copilot</h3>
+          <p class="case-desc">Optimized content specifically for LLM citation — moving beyond traditional search to make the brand a primary source for AI-generated answers.</p>
           <div class="case-pills">
             <span class="pill">10,500+ citations</span>
-            <span class="pill">AI Overview coverage</span>
+            <span class="pill">18 avg. cited pages</span>
           </div>
-          <a href="contact.html" class="card-link">Read the strategy <span aria-hidden="true">&rarr;</span></a>
+        </article>
+
+        <article class="case-card reveal" data-tilt data-tilt-strength="6">
+          <button class="case-single-img" data-cert-modal data-cert-img="assets/case-studies/cs4-ai-overview.jpg" data-cert-title="Google AI Overview placement — medical content" aria-label="View full screenshot">
+            <img src="assets/case-studies/cs4-ai-overview.jpg" alt="Google AI Overview screenshot showing medical content ranked as the cited source" loading="lazy" decoding="async">
+          </button>
+          <p class="case-industry">AEO — Healthcare</p>
+          <h3>Won the Google AI Overview spot for medical content</h3>
+          <p class="case-desc">Focused on E-E-A-T and clear, structured information to become the primary source Google's AI trusts and recommends to users.</p>
+          <div class="case-pills">
+            <span class="pill">AI Overview placement</span>
+          </div>
+        </article>
+
+        <article class="case-card reveal" data-tilt data-tilt-strength="6">
+          <button class="case-single-img" data-cert-modal data-cert-img="assets/case-studies/cs5-ai-visibility.jpg" data-cert-title="30-day sprint — 46.1% traffic increase + AI visibility" aria-label="View full dashboard screenshot">
+            <img src="assets/case-studies/cs5-ai-visibility.jpg" alt="Dashboard showing 46.1% organic traffic increase and 20+ AI visibility points across ChatGPT, Gemini and Google AI" loading="lazy" decoding="async">
+          </button>
+          <p class="case-industry">SEO + GEO — 30-Day Sprint</p>
+          <h3>+46.1% organic traffic and 20+ AI visibility points</h3>
+          <p class="case-desc">Delivered immediate traffic growth while securing citations across ChatGPT, Gemini and Google AI — keeping the business ahead of search trends.</p>
+          <div class="case-pills">
+            <span class="pill">+46.1% traffic</span>
+            <span class="pill">20+ AI visibility</span>
+          </div>
         </article>
       </div>
     </div>
@@ -741,7 +832,7 @@
       <h3>Sitemap</h3>
       <ul>
         <li><a href="#services">Services</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="https://mobashiraleeseo.github.io/mobashir-portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
         <li><a href="#case-studies">Case Studies</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">About</a></li>
