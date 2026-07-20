@@ -51,6 +51,49 @@
     document.querySelectorAll('.modal-backdrop.open').forEach(closeModal);
   });
 
+  /* ============ CERTIFICATE LIGHTBOX ============ */
+  const certModal = document.getElementById('cert-modal');
+  if (certModal) {
+    const certImg = document.getElementById('cert-modal-img');
+    const certTitle = document.getElementById('cert-modal-title');
+    document.querySelectorAll('[data-cert-modal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        certImg.src = btn.dataset.certImg;
+        certImg.alt = btn.dataset.certTitle;
+        certTitle.textContent = btn.dataset.certTitle;
+        openModal(certModal);
+      });
+    });
+  }
+
+  /* ============ VIDEO SHOWCASE: play-on-view + sound toggle ============ */
+  const showcaseVideos = document.querySelectorAll('.video-card-el');
+  if (showcaseVideos.length) {
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const vid = entry.target;
+          if (entry.isIntersecting) {
+            vid.play().catch(() => {});
+          } else {
+            vid.pause();
+          }
+        });
+      }, { threshold: 0.5 });
+      showcaseVideos.forEach(vid => videoObserver.observe(vid));
+    }
+    // If reduced motion is preferred, videos stay paused on their poster frame.
+  }
+
+  document.querySelectorAll('.video-sound-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const video = btn.closest('.video-card').querySelector('.video-card-el');
+      video.muted = !video.muted;
+      btn.setAttribute('aria-pressed', String(!video.muted));
+      btn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+    });
+  });
+
   /* ============ ANNOUNCEMENT BAR DISMISS (in-memory only, no storage) ============ */
   const announcementBar = document.getElementById('announcement-bar');
   if (announcementBar) {
