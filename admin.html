@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Mobashir Alee Khan</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.min.css">
+<style>
+  /* Admin-only layout — kept inline since this page is never public-facing */
+  body { background: var(--color-bg); }
+  .admin-shell { max-width: 1100px; margin-inline: auto; padding: var(--space-7) var(--space-4); }
+  .admin-login-card {
+    max-width: 400px; margin: 15vh auto; background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: var(--space-7) var(--space-6); box-shadow: var(--shadow-lg);
+  }
+  .admin-login-card h1 { font-size: var(--fs-xl); margin-bottom: var(--space-5); text-align: center; }
+  .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-7); flex-wrap: wrap; gap: var(--space-3); }
+  .admin-tabs { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); border-bottom: 1px solid var(--color-border); }
+  .admin-tab { padding: var(--space-3) var(--space-5); font-weight: 600; font-size: var(--fs-sm); color: var(--color-ink-subtle); border-bottom: 2px solid transparent; }
+  .admin-tab.active { color: var(--color-primary); border-bottom-color: var(--color-accent); }
+  .admin-panel { display: none; }
+  .admin-panel.active { display: block; }
+  .admin-filter-row { display: flex; gap: var(--space-2); margin-bottom: var(--space-5); flex-wrap: wrap; }
+  .admin-review-row {
+    display: grid; grid-template-columns: 1fr auto; gap: var(--space-4); align-items: start;
+    background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    padding: var(--space-5); margin-bottom: var(--space-4);
+  }
+  .admin-review-meta { font-size: var(--fs-xs); color: var(--color-ink-subtle); margin-top: var(--space-2); display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .admin-status-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-pill); }
+  .admin-status-pending { background: rgba(230,168,68,0.15); color: #B8860B; }
+  .admin-status-approved { background: rgba(34,184,196,0.15); color: var(--color-data); }
+  .admin-status-rejected { background: rgba(192,57,43,0.1); color: #C0392B; }
+  .admin-actions { display: flex; flex-direction: column; gap: var(--space-2); min-width: 120px; }
+  .admin-btn {
+    font-size: var(--fs-xs); font-weight: 600; padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong); text-align: center; transition: all var(--dur-fast) var(--ease-out);
+  }
+  .admin-btn:hover { background: var(--color-surface-raised); }
+  .admin-btn-approve { color: var(--color-data); border-color: var(--color-data); }
+  .admin-btn-reject { color: #C0392B; border-color: #C0392B; }
+  .admin-btn-delete { color: #fff; background: #C0392B; border-color: #C0392B; }
+  .admin-btn-delete:hover { background: #A5301F; }
+  .admin-review-edit-area { width: 100%; min-height: 70px; margin-top: var(--space-2); font-size: var(--fs-sm); padding: var(--space-2); border-radius: var(--radius-sm); border: 1px solid var(--color-border); }
+  .admin-partner-row {
+    display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-4); align-items: center;
+    background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    padding: var(--space-4); margin-bottom: var(--space-3);
+  }
+  .admin-add-partner-form { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); background: var(--color-surface-raised); padding: var(--space-5); border-radius: var(--radius-md); margin-bottom: var(--space-6); }
+  .admin-logout { font-size: var(--fs-sm); color: var(--color-ink-subtle); }
+  .admin-empty { text-align: center; color: var(--color-ink-subtle); padding: var(--space-6); }
+</style>
+</head>
+<body>
+
+<div class="admin-shell">
+
+  <!-- ============ LOGIN GATE ============ -->
+  <div class="admin-login-card" id="admin-login-card">
+    <h1>Admin Login</h1>
+    <form id="admin-login-form">
+      <div class="form-group" style="margin-bottom: var(--space-4);">
+        <label for="admin-email">Email</label>
+        <input type="email" id="admin-email" class="form-input" required autocomplete="username">
+      </div>
+      <div class="form-group" style="margin-bottom: var(--space-5);">
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password" class="form-input" required autocomplete="current-password">
+      </div>
+      <p class="form-error-banner" id="admin-login-error" role="alert" style="margin-bottom: var(--space-4);"></p>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Log In</button>
+    </form>
+  </div>
+
+  <!-- ============ DASHBOARD (hidden until logged in) ============ -->
+  <div id="admin-dashboard" hidden>
+    <div class="admin-header">
+      <h1>Dashboard</h1>
+      <div>
+        <span id="admin-user-email" class="admin-logout"></span>
+        &nbsp;·&nbsp;
+        <button class="admin-logout" id="admin-logout-btn" style="text-decoration:underline;">Log out</button>
+      </div>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="reviews">Reviews</button>
+      <button class="admin-tab" data-tab="partners">Partners</button>
+    </div>
+
+    <!-- REVIEWS PANEL -->
+    <section class="admin-panel active" id="admin-panel-reviews">
+      <div class="admin-filter-row">
+        <button class="filter-btn" data-status-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-status-filter="pending" aria-pressed="false">Pending</button>
+        <button class="filter-btn" data-status-filter="approved" aria-pressed="false">Approved</button>
+        <button class="filter-btn" data-status-filter="rejected" aria-pressed="false">Rejected</button>
+      </div>
+      <div id="admin-reviews-list"></div>
+      <p class="admin-empty" id="admin-reviews-empty" hidden>No reviews in this filter.</p>
+    </section>
+
+    <!-- PARTNERS PANEL -->
+    <section class="admin-panel" id="admin-panel-partners">
+      <form class="admin-add-partner-form" id="admin-add-partner-form">
+        <div class="form-group">
+          <label for="partner-name">Company name</label>
+          <input type="text" id="partner-name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="partner-initials">Initials (1-3 letters)</label>
+          <input type="text" id="partner-initials" class="form-input" maxlength="3" required>
+        </div>
+        <div class="form-group">
+          <label for="partner-color">Badge color</label>
+          <input type="color" id="partner-color" class="form-input" value="#0B2C4D" style="height:52px;padding:4px;">
+        </div>
+        <div class="form-group">
+          <label for="partner-url">Website URL (optional)</label>
+          <input type="url" id="partner-url" class="form-input" placeholder="https://">
+        </div>
+        <div class="form-group" style="align-self:end;">
+          <button type="submit" class="btn btn-primary">Add Partner</button>
+        </div>
+      </form>
+      <div id="admin-partners-list"></div>
+      <p class="admin-empty" id="admin-partners-empty" hidden>No partners added yet.</p>
+    </section>
+  </div>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>

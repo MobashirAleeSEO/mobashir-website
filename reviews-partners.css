@@ -1,0 +1,82 @@
+/* ==========================================================================
+   REVIEWS-PARTNERS.CSS — premium glassmorphic review cards, star-rating
+   submission form, and grayscale-to-color partner logo marquee.
+   Load after cro.css in the bundle.
+   ========================================================================== */
+
+/* ---------- REVIEWS SUMMARY ---------- */
+.reviews-summary {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-4);
+  text-align: center; margin-bottom: var(--space-8);
+}
+.reviews-summary-score { font-family: var(--font-mono); font-size: var(--fs-4xl); font-weight: 600; color: var(--color-accent); }
+.reviews-summary-stars { font-size: var(--fs-lg); color: var(--color-accent); letter-spacing: 2px; }
+.reviews-summary-count { font-size: var(--fs-sm); color: var(--color-ink-subtle); }
+
+/* ---------- REVIEW CARDS ---------- */
+.reviews-grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr; margin-bottom: var(--space-8); }
+@media (min-width: 768px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+.review-card {
+  position: relative; background: rgba(255,255,255,0.55); backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-lg); padding: var(--space-6); box-shadow: var(--shadow-md);
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+@supports not (backdrop-filter: blur(1px)) { .review-card { background: rgba(255,255,255,0.96); } }
+.review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.review-pin {
+  position: absolute; top: -12px; right: var(--space-5); background: var(--gradient-accent); color: var(--color-accent-ink);
+  font-size: var(--fs-xs); font-weight: 700; padding: 4px 12px; border-radius: var(--radius-pill); box-shadow: var(--shadow-sm);
+}
+.review-stars { color: var(--color-accent); font-size: var(--fs-base); letter-spacing: 2px; margin-bottom: var(--space-4); }
+.review-message { font-family: var(--font-display); font-style: italic; color: var(--color-ink); font-size: var(--fs-base); line-height: var(--lh-relaxed); margin-bottom: var(--space-5); }
+.review-footer { display: flex; align-items: center; gap: var(--space-3); }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center;
+  background: var(--gradient-primary); color: var(--color-accent); font-weight: 700; font-size: var(--fs-sm);
+}
+.review-name { font-style: normal; font-weight: 600; font-size: var(--fs-sm); color: var(--color-ink); display: block; }
+.review-company { font-size: var(--fs-xs); color: var(--color-ink-subtle); }
+.reviews-empty { text-align: center; color: var(--color-ink-subtle); padding: var(--space-7) 0; }
+
+/* ---------- REVIEW SUBMISSION FORM ---------- */
+.review-form-card {
+  max-width: 640px; margin-inline: auto; background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-7) var(--space-6); box-shadow: var(--shadow-md);
+}
+.star-input { display: flex; gap: var(--space-2); margin-bottom: var(--space-2); }
+.star-input-btn {
+  font-size: var(--fs-2xl); line-height: 1; color: var(--color-border-strong); transition: color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-spring);
+}
+.star-input-btn:hover, .star-input-btn:focus-visible { transform: scale(1.15); }
+.star-input-btn.active, .star-input-btn.active ~ .star-input-btn { color: var(--color-border-strong); }
+.star-input-btn.active { color: var(--color-accent); }
+.star-input-btn:hover ~ .star-input-btn { color: var(--color-border-strong); }
+.review-form-success, .review-form-error {
+  display: none; text-align: center; padding: var(--space-4); border-radius: var(--radius-sm); font-size: var(--fs-sm);
+}
+.review-form-success.show { display: block; background: rgba(34,184,196,0.1); color: var(--color-data); }
+.review-form-error.show { display: block; background: rgba(192,57,43,0.08); color: #C0392B; }
+
+/* ---------- PARTNERS MARQUEE (grayscale → color on hover) ---------- */
+.partners-section { overflow: hidden; }
+.partners-marquee {
+  position: relative; overflow: hidden; margin-top: var(--space-6);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.partners-track { display: flex; align-items: center; gap: var(--space-8); width: max-content; animation: partnersScroll 32s linear infinite; }
+.partners-marquee:hover .partners-track { animation-play-state: paused; }
+@keyframes partnersScroll { to { transform: translateX(-50%); } }
+.partner-tile {
+  flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+  width: 140px; filter: grayscale(1) opacity(0.55); transition: filter var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.partner-tile:hover, .partner-tile:focus-visible { filter: grayscale(0) opacity(1); transform: translateY(-3px); }
+.partner-logo-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-md); display: grid; place-items: center;
+  color: #fff; font-weight: 700; font-size: var(--fs-base); box-shadow: var(--shadow-sm);
+}
+.partner-name { font-size: var(--fs-xs); font-weight: 600; color: var(--color-ink-muted); text-align: center; }
+@media (prefers-reduced-motion: reduce) { .partners-track { animation: none; overflow-x: auto; } }

@@ -139,7 +139,7 @@
 </div>
 <div class="page-transition" id="page-transition" aria-hidden="true"></div>
 <div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span class="cursor-ring-label"></span></div>
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -410,6 +410,31 @@
             <h3>Behind the Work</h3>
             <p>A closer look at how projects come together.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENT LOGO MARQUEE (placeholder tiles — swap for real logos) ============ -->
+  <section class="section-tint logo-marquee-section" aria-labelledby="clients-heading">
+    <div class="container">
+      <p class="eyebrow" style="text-align:center;">Clients</p>
+      <h2 id="clients-heading" class="visually-hidden">Brands worked with</h2>
+      <div class="logo-marquee">
+        <div class="logo-marquee-track">
+          <span class="logo-tile">Your Logo Here</span>
+          <span class="logo-tile">Your Logo Here</span>
+          <span class="logo-tile">Your Logo Here</span>
+          <span class="logo-tile">Your Logo Here</span>
+          <span class="logo-tile">Your Logo Here</span>
+          <span class="logo-tile">Your Logo Here</span>
+          <!-- duplicate set for seamless infinite loop -->
+          <span class="logo-tile" aria-hidden="true">Your Logo Here</span>
+          <span class="logo-tile" aria-hidden="true">Your Logo Here</span>
+          <span class="logo-tile" aria-hidden="true">Your Logo Here</span>
+          <span class="logo-tile" aria-hidden="true">Your Logo Here</span>
+          <span class="logo-tile" aria-hidden="true">Your Logo Here</span>
+          <span class="logo-tile" aria-hidden="true">Your Logo Here</span>
         </div>
       </div>
     </div>
@@ -694,7 +719,13 @@
   <section class="testimonials section-light" id="testimonials" aria-labelledby="testimonials-heading">
     <div class="container">
       <div class="section-header reveal">
-        <p class="eyebrow">Testimonials</p>
+        <svg class="wavy-divider" viewBox="0 0 200 20" width="140" aria-hidden="true">
+          <path d="M0,10 Q12.5,0 25,10 T50,10 T75,10 T100,10 T125,10 T150,10 T175,10 T200,10"/>
+        </svg>
+        <p class="eyebrow eyebrow-accent">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="2" fill="currentColor"/><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1" fill="none" opacity="0.4"/></svg>
+          Testimonials
+        </p>
         <h2 id="testimonials-heading">What clients say after the first quarter</h2>
       </div>
 
@@ -726,6 +757,86 @@
           <div class="t-dots" id="t-dots" role="tablist" aria-label="Choose testimonial"></div>
           <button class="t-btn" id="t-next" aria-label="Next testimonial">&rarr;</button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENT REVIEWS (visitor-submitted, moderated) ============ -->
+  <section class="section-tint reviews-section" id="reviews" aria-labelledby="reviews-heading">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center; margin-inline:auto;">
+        <p class="eyebrow">Client Reviews</p>
+        <h2 id="reviews-heading">What people say — straight from the source</h2>
+      </div>
+
+      <div class="reviews-summary reveal">
+        <span class="reviews-summary-score" id="reviews-avg">—</span>
+        <div>
+          <div class="reviews-summary-stars" id="reviews-summary-stars" aria-hidden="true">☆☆☆☆☆</div>
+          <p class="reviews-summary-count" id="reviews-count">Loading reviews…</p>
+        </div>
+      </div>
+
+      <div class="reviews-grid" id="reviews-grid" aria-live="polite"></div>
+      <p class="reviews-empty" id="reviews-empty" hidden>No reviews yet — be the first to share one below.</p>
+
+      <div class="review-form-card reveal">
+        <h3 style="margin-bottom: var(--space-2);">Leave a review</h3>
+        <p class="modal-sub">Submitted reviews are checked before appearing publicly — you'll still be the first to know it went live.</p>
+
+        <form id="review-form" aria-label="Submit a review">
+          <input type="hidden" name="rating" value="0">
+          <input type="text" name="website" class="visually-hidden" tabindex="-1" autocomplete="off">
+
+          <div class="form-group" style="margin-bottom: var(--space-5);">
+            <label>Your rating</label>
+            <div class="star-input" role="radiogroup" aria-label="Star rating">
+              <button type="button" class="star-input-btn" data-star="1" aria-pressed="false" aria-label="1 star">★</button>
+              <button type="button" class="star-input-btn" data-star="2" aria-pressed="false" aria-label="2 stars">★</button>
+              <button type="button" class="star-input-btn" data-star="3" aria-pressed="false" aria-label="3 stars">★</button>
+              <button type="button" class="star-input-btn" data-star="4" aria-pressed="false" aria-label="4 stars">★</button>
+              <button type="button" class="star-input-btn" data-star="5" aria-pressed="false" aria-label="5 stars">★</button>
+            </div>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="form-group">
+              <label for="review-name">Full name</label>
+              <input type="text" id="review-name" name="name" class="form-input" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="review-company">Company <span style="font-weight:400;">(optional)</span></label>
+              <input type="text" id="review-company" name="company" class="form-input" autocomplete="organization">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="review-email">Email <span style="font-weight:400;">(optional, not shown publicly)</span></label>
+              <input type="email" id="review-email" name="email" class="form-input" autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="review-message">Your review</label>
+              <textarea id="review-message" name="message" class="form-textarea" rows="4" required></textarea>
+            </div>
+          </div>
+
+          <p class="review-form-error" id="review-form-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary form-submit btn-magnetic" data-magnetic>Submit Review</button>
+        </form>
+        <p class="review-form-success" id="review-form-success" role="status">Thank you — your review has been submitted for approval.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUSTED PARTNERS ============ -->
+  <section class="section-light partners-section" aria-labelledby="partners-heading">
+    <div class="container">
+      <p class="eyebrow" style="text-align:center;">Trusted Partners</p>
+      <h2 id="partners-heading" class="visually-hidden">Companies I've worked with</h2>
+      <div class="partners-marquee">
+        <div class="partners-track" id="partners-track"></div>
       </div>
     </div>
   </section>
@@ -897,26 +1008,28 @@
     <h2 id="booking-modal-title">Grab 30 minutes on the calendar</h2>
     <p class="modal-sub">Pick a time that works &mdash; no pitch deck, just a straight read on your SEO, GEO and AEO position.</p>
 
-    <div class="calendly-placeholder">
-      <p>Calendly embed renders here in production:</p>
-      <code>&lt;div class="calendly-inline-widget" data-url="https://calendly.com/your-link"&gt;&lt;/div&gt;</code>
+    <div class="calendly-embed">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR-USERNAME" style="min-width:280px;height:480px;"></div>
     </div>
 
     <div class="modal-divider"><span>Or send a few details instead</span></div>
 
-    <form class="lead-form" aria-label="Quick contact form">
+    <form class="lead-form" aria-label="Quick contact form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="Booking request from mobashiraleekhan.com">
+      <input type="text" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
       <div class="lead-form-fields">
         <div class="form-group">
           <label for="booking-name">Name</label>
-          <input type="text" id="booking-name" class="form-input" required autocomplete="name">
+          <input type="text" id="booking-name" name="name" class="form-input" required autocomplete="name">
         </div>
         <div class="form-group">
           <label for="booking-email">Email</label>
-          <input type="email" id="booking-email" class="form-input" required autocomplete="email">
+          <input type="email" id="booking-email" name="email" class="form-input" required autocomplete="email">
         </div>
         <div class="form-group">
           <label for="booking-message">What do you need help with?</label>
-          <textarea id="booking-message" class="form-textarea" rows="3"></textarea>
+          <textarea id="booking-message" name="message" class="form-textarea" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary form-submit btn-magnetic" data-magnetic>Request a Call</button>
       </div>
@@ -937,11 +1050,14 @@
     <h2 id="exit-modal-title">Get a free 15-point SEO audit checklist</h2>
     <p class="modal-sub">The exact checklist used before taking on a new client &mdash; technical, on-page and AI-visibility basics, in one PDF.</p>
 
-    <form class="lead-form" aria-label="Get the free audit checklist">
+    <form class="lead-form" aria-label="Get the free audit checklist" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="Free audit checklist request from mobashiraleekhan.com">
+      <input type="text" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
       <div class="lead-form-fields">
         <div class="form-group">
           <label for="exit-email" class="visually-hidden">Email address</label>
-          <input type="email" id="exit-email" class="form-input" placeholder="you@company.com" required autocomplete="email">
+          <input type="email" id="exit-email" name="email" class="form-input" placeholder="you@company.com" required autocomplete="email">
         </div>
         <button type="submit" class="btn btn-primary form-submit btn-magnetic" data-magnetic>Send Me the Checklist</button>
       </div>
@@ -953,6 +1069,8 @@
   </div>
 </div>
 
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="app.min.js" defer></script>
+<script type="module" src="reviews-partners.js"></script>
 </body>
 </html>

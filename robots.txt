@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
 # AI / GEO crawlers — explicitly allowed since this site is optimized to be cited by AI answer engines
 User-agent: GPTBot
