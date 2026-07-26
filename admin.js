@@ -24,6 +24,7 @@ onAuthStateChanged(auth, (user) => {
     loginCard.hidden = true;
     dashboard.hidden = false;
     userEmailLabel.textContent = user.email;
+    loadMessages();
     loadReviews();
     loadPartners();
   } else {
@@ -257,5 +258,138 @@ document.getElementById("admin-add-partner-form").addEventListener("submit", asy
     await loadPartners();
   } catch (err) {
     alert("Failed to add partner: " + err.message);
+  }
+});
+
+/* ============================================================
+   MESSAGES (contact form + booking quick-contact + exit-intent)
+   ============================================================ */
+let allMessages = [];
+let currentMessageFilter = "all";
+
+async function loadMessages() {
+  const list = document.getElementById("admin-messages-list");
+  list.innerHTML = "<p class='admin-empty'>Loading…</p>";
+  try {
+    const q = query(collection(db, "contacts"), orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+    allMessages = [];
+    snap.forEach(d => allMessages.push({ id: d.id, ...d.data() }));
+    renderMessages();
+  } catch (err) {
+    list.innerHTML = `<p class="admin-empty">Failed to load messages: ${escapeHTML(err.message)}</p>`;
+  }
+}
+
+const sourceLabels = {
+  "contact-page": "Contact Form",
+  "booking-modal": "Quick Contact",
+  "exit-intent": "Checklist Signup"
+};
+
+function renderMessages() {
+  const list = document.getElementById("admin-messages-list");
+  const emptyEl = document.getElementById("admin-messages-empty");
+  const filtered = allMessages.filter(m => {
+    if (currentMessageFilter === "all") return true;
+    if (currentMessageFilter === "unread") return !m.read;
+    return m.source === currentMessageFilter;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = "";
+    emptyEl.hidden = false;
+    return;
+  }
+  emptyEl.hidden = true;
+
+  list.innerHTML = filtered.map(m => `
+    <div class="admin-review-row" data-id="${m.id}" style="${m.read ? "" : "border-left: 3px solid var(--color-accent);"}">
+      <div>
+        <span class="admin-status-badge" style="background:rgba(46,158,255,.12);color:var(--color-primary);">${escapeHTML(sourceLabels[m.source] || m.source || "Unknown")}</span>
+        ${!m.read ? '<span class="admin-status-badge admin-status-pending">unread</span>' : ""}
+        <p style="margin-top:var(--space-2);"><strong>${escapeHTML(m.name || "(no name)")}</strong>${m.company ? ` — ${escapeHTML(m.company)}` : ""}</p>
+        <p style="font-size:var(--fs-sm); margin-top:var(--space-1);">${escapeHTML(m.email || "(no email)")}${m.website ? " · " + escapeHTML(m.website) : ""}${m.budget ? " · " + escapeHTML(m.budget) : ""}</p>
+        ${m.message ? `<p style="margin-top:var(--space-2); font-size:var(--fs-sm); white-space:pre-wrap;">${escapeHTML(m.message)}</p>` : ""}
+        <div class="admin-review-meta"><span>${fmtDate(m.createdAt)}</span></div>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-btn" data-action="toggle-read">${m.read ? "Mark Unread" : "Mark Read"}</button>
+        <button class="admin-btn admin-btn-delete" data-action="delete">Delete</button>
+      </div>
+    </div>
+  `).join("");
+
+  list.querySelectorAll(".admin-review-row").forEach(row => {
+    const id = row.dataset.id;
+    const msg = allMessages.find(m => m.id === id);
+    row.querySelectorAll("[data-action]").forEach(btn => {
+      btn.addEventListener("click", () => handleMessageAction(id, msg, btn.dataset.action));
+    });
+  });
+}
+
+async function handleMessageAction(id, msg, action) {
+  const ref = doc(db, "contacts", id);
+  try {
+    if (action === "toggle-read") await updateDoc(ref, { read: !msg.read });
+    else if (action === "delete") {
+      if (!confirm("Delete this message permanently?")) return;
+      await deleteDoc(ref);
+    }
+    await loadMessages();
+  } catch (err) {
+    alert("Action failed: " + err.message);
+  }
+}
+
+document.querySelectorAll("[data-message-filter]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-message-filter]").forEach(b => b.setAttribute("aria-pressed", "false"));
+    btn.setAttribute("aria-pressed", "true");
+    currentMessageFilter = btn.dataset.messageFilter;
+    renderMessages();
+  });
+});
+
+/* ============================================================
+   ONE-CLICK PARTNER SEEDING (from the reference screenshot)
+   ============================================================ */
+const STARTER_PARTNERS = [
+  { name: "Creative Brains", initials: "CB", iconBg: "#0B2C4D", url: "" },
+  { name: "uSERP", initials: "U", iconBg: "#7C3AED", url: "" },
+  { name: "Coupler.io", initials: "C", iconBg: "#22B8C4", url: "https://coupler.io" },
+  { name: "LVREALTORS", initials: "LVR", iconBg: "#1E3A8A", url: "" },
+  { name: "Alpine Credits", initials: "AC", iconBg: "#22C55E", url: "" },
+  { name: "cloudtalk.io", initials: "C", iconBg: "#2563EB", url: "https://cloudtalk.io" },
+  { name: "Netcoins", initials: "N", iconBg: "#111827", url: "" },
+  { name: "Gore", initials: "G", iconBg: "#DC2626", url: "" },
+  { name: "Winden", initials: "W", iconBg: "#8B5CF6", url: "" },
+  { name: "Bragg", initials: "B", iconBg: "#1E3A8A", url: "" }
+];
+
+document.getElementById("admin-seed-partners-btn").addEventListener("click", async () => {
+  const statusEl = document.getElementById("admin-seed-status");
+  statusEl.textContent = "Checking for existing entries…";
+  try {
+    const existingSnap = await getDocs(collection(db, "partners"));
+    const existingNames = new Set();
+    existingSnap.forEach(d => existingNames.add((d.data().name || "").toLowerCase()));
+
+    const toAdd = STARTER_PARTNERS.filter(p => !existingNames.has(p.name.toLowerCase()));
+    if (!toAdd.length) {
+      statusEl.textContent = "All 10 already exist — nothing to add.";
+      return;
+    }
+
+    let baseOrder = allPartners.reduce((max, p) => Math.max(max, p.order || 0), 0);
+    for (const p of toAdd) {
+      baseOrder += 1;
+      await addDoc(collection(db, "partners"), { ...p, visible: true, order: baseOrder });
+    }
+    statusEl.textContent = `Added ${toAdd.length} partner${toAdd.length !== 1 ? "s" : ""}.`;
+    await loadPartners();
+  } catch (err) {
+    statusEl.textContent = "Failed: " + err.message;
   }
 });

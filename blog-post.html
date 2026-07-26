@@ -74,7 +74,7 @@
 </div>
 <div class="page-transition" id="page-transition" aria-hidden="true"></div>
 <div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span class="cursor-ring-label"></span></div>
 <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -354,26 +354,26 @@
     <h2 id="booking-modal-title">Grab 30 minutes on the calendar</h2>
     <p class="modal-sub">Pick a time that works &mdash; no pitch deck, just a straight read on your SEO, GEO and AEO position.</p>
 
-    <div class="calendly-placeholder">
-      <p>Calendly embed renders here in production:</p>
-      <code>&lt;div class="calendly-inline-widget" data-url="https://calendly.com/your-link"&gt;&lt;/div&gt;</code>
+    <div class="calendly-embed">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR-USERNAME" style="min-width:280px;height:480px;"></div>
     </div>
 
     <div class="modal-divider"><span>Or send a few details instead</span></div>
 
     <form class="lead-form" aria-label="Quick contact form">
+      <input type="text" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
       <div class="lead-form-fields">
         <div class="form-group">
           <label for="booking-name">Name</label>
-          <input type="text" id="booking-name" class="form-input" required autocomplete="name">
+          <input type="text" id="booking-name" name="name" class="form-input" required autocomplete="name">
         </div>
         <div class="form-group">
           <label for="booking-email">Email</label>
-          <input type="email" id="booking-email" class="form-input" required autocomplete="email">
+          <input type="email" id="booking-email" name="email" class="form-input" required autocomplete="email">
         </div>
         <div class="form-group">
           <label for="booking-message">What do you need help with?</label>
-          <textarea id="booking-message" class="form-textarea" rows="3"></textarea>
+          <textarea id="booking-message" name="message" class="form-textarea" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary form-submit btn-magnetic" data-magnetic>Request a Call</button>
       </div>
@@ -395,10 +395,11 @@
     <p class="modal-sub">The exact checklist used before taking on a new client &mdash; technical, on-page and AI-visibility basics, in one PDF.</p>
 
     <form class="lead-form" aria-label="Get the free audit checklist">
+      <input type="text" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
       <div class="lead-form-fields">
         <div class="form-group">
           <label for="exit-email" class="visually-hidden">Email address</label>
-          <input type="email" id="exit-email" class="form-input" placeholder="you@company.com" required autocomplete="email">
+          <input type="email" id="exit-email" name="email" class="form-input" placeholder="you@company.com" required autocomplete="email">
         </div>
         <button type="submit" class="btn btn-primary form-submit btn-magnetic" data-magnetic>Send Me the Checklist</button>
       </div>
@@ -410,6 +411,8 @@
   </div>
 </div>
 
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="app.min.js" defer></script>
+<script type="module" src="forms.js"></script>
 </body>
 </html>

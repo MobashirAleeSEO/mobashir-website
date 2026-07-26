@@ -55,6 +55,16 @@
   .admin-add-partner-form { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); background: var(--color-surface-raised); padding: var(--space-5); border-radius: var(--radius-md); margin-bottom: var(--space-6); }
   .admin-logout { font-size: var(--fs-sm); color: var(--color-ink-subtle); }
   .admin-empty { text-align: center; color: var(--color-ink-subtle); padding: var(--space-6); }
+
+  @media (max-width: 640px) {
+    .admin-shell { padding: var(--space-5) var(--space-3); }
+    .admin-review-row, .admin-partner-row { grid-template-columns: 1fr; }
+    .admin-actions { flex-direction: row; flex-wrap: wrap; min-width: 0; margin-top: var(--space-3); }
+    .admin-actions .admin-btn { flex: 1 1 auto; }
+    .admin-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+    .admin-tab { flex-shrink: 0; }
+    .admin-login-card { margin: 8vh auto; }
+  }
 </style>
 </head>
 <body>
@@ -90,12 +100,26 @@
     </div>
 
     <div class="admin-tabs">
-      <button class="admin-tab active" data-tab="reviews">Reviews</button>
+      <button class="admin-tab active" data-tab="messages">Messages</button>
+      <button class="admin-tab" data-tab="reviews">Reviews</button>
       <button class="admin-tab" data-tab="partners">Partners</button>
     </div>
 
+    <!-- MESSAGES PANEL -->
+    <section class="admin-panel active" id="admin-panel-messages">
+      <div class="admin-filter-row">
+        <button class="filter-btn" data-message-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-message-filter="unread" aria-pressed="false">Unread</button>
+        <button class="filter-btn" data-message-filter="contact-page" aria-pressed="false">Contact Form</button>
+        <button class="filter-btn" data-message-filter="booking-modal" aria-pressed="false">Quick Contact</button>
+        <button class="filter-btn" data-message-filter="exit-intent" aria-pressed="false">Checklist Signups</button>
+      </div>
+      <div id="admin-messages-list"></div>
+      <p class="admin-empty" id="admin-messages-empty" hidden>No messages in this filter.</p>
+    </section>
+
     <!-- REVIEWS PANEL -->
-    <section class="admin-panel active" id="admin-panel-reviews">
+    <section class="admin-panel" id="admin-panel-reviews">
       <div class="admin-filter-row">
         <button class="filter-btn" data-status-filter="all" aria-pressed="true">All</button>
         <button class="filter-btn" data-status-filter="pending" aria-pressed="false">Pending</button>
@@ -108,6 +132,11 @@
 
     <!-- PARTNERS PANEL -->
     <section class="admin-panel" id="admin-panel-partners">
+      <div id="admin-seed-partners-wrap" style="margin-bottom: var(--space-6); padding: var(--space-5); background: rgba(46,158,255,0.06); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-md);">
+        <p style="font-size: var(--fs-sm); margin-bottom: var(--space-3);">One-time setup: import the 10 client logos from your reference screenshot. Safe to click once — it checks for existing entries first and won't create duplicates.</p>
+        <button type="button" class="btn btn-ghost" id="admin-seed-partners-btn">Import 10 Starter Logos</button>
+        <span id="admin-seed-status" style="margin-left: var(--space-3); font-size: var(--fs-sm);"></span>
+      </div>
       <form class="admin-add-partner-form" id="admin-add-partner-form">
         <div class="form-group">
           <label for="partner-name">Company name</label>
